@@ -1,0 +1,109 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
+// https://github.com/microsoft/vscode-dev-containers/tree/v0.209.6/containers/php-mariadb
+// Update the VARIANT arg in docker-compose.yml to pick a PHP version
+{
+  "name": "PHP & MYSQL",
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "app",
+  "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+  // Minimum host requirements
+  "hostRequirements": {
+    "cpus": 2,
+    "memory": "4gb",
+    "storage": "6gb"
+  },
+  "settings": {
+    "editor.renderWhitespace": "boundary",
+    "files.trimTrailingWhitespace": true,
+    "editor.rulers": [
+      120
+    ],
+    "editor.tabSize": 2,
+    "editor.wordWrap": "off",
+    "editor.wordWrapColumn": 120,
+    "emmet.includeLanguages": {
+      "twig": "html"
+    },
+    "emptyIndent.removeIndent": true,
+    "emptyIndent.highlightIndent": false,
+    "emptyIndent.highlightColor": "rgba(246,36,89,0.6)",
+    "files.associations": {
+      "*.inc": "php",
+      "*.module": "php",
+      "*.install": "php",
+      "*.theme": "php",
+      "*.profile": "php",
+      "*.tpl.php": "php",
+      "*.test": "php",
+      "*.php": "php",
+      "*.info": "ini",
+      "*.html": "twig"
+    },
+    "html.format.enable": true,
+    "html.format.endWithNewline": true,
+    "html.format.indentInnerHtml": true,
+    "html.format.wrapLineLength": 80,
+    "intelephense.completion.maxItems": 1000,
+    "intelephense.environment.phpVersion": "8.1.0",
+    "intelephense.files.associations": [
+      "*.php",
+      "*.phtml",
+      "*.inc",
+      "*.module",
+      "*.install",
+      "*.theme",
+      "*.tpl.php",
+      "*.test"
+    ],
+    "intelephense.files.maxSize": 10000000,
+    "intelephense.format.enable": true,
+    "intelephense.phpdoc.returnVoid": false,
+    "intelephense.phpdoc.useFullyQualifiedNames": true,
+    "php-docblocker.gap": true,
+    "php-docblocker.returnGap":true,
+    "php-docblocker.useShortNames": true,
+    "php-docblocker.qualifyClassNames":true,
+    "phpsab.executablePathCBF": "vendor/bin/phpcbf",
+    "phpsab.executablePathCS": "vendor/bin/phpcs",
+    "phpsab.fixerArguments": [
+      "--extensions=php,module,inc,install,test,profile,theme,css,info,txt,md,yml"
+    ],
+    "phpsab.fixerEnable": true,
+    "phpsab.snifferArguments": [
+      "--extensions=php,module,inc,install,test,profile,theme,css,info,txt,md,yml"
+    ],
+    "phpsab.snifferMode": "onType",
+    "phpsab.snifferTypeDelay": 500,
+    "phpsab.standard": "Drupal,DrupalPractice",
+  },
+  // Add the IDs of extensions you want installed when the container is created.
+  "extensions": [
+    "DmitryDorofeev.empty-indent",
+    "bmewburn.vscode-intelephense-client",
+    "neilbrayfield.php-docblocker",
+    "rangav.vscode-thunder-client",
+    "valeryanm.vscode-phpsab",
+    "xdebug.php-debug"
+  ],
+  // For use with PHP or Apache (e.g.php -S localhost:8080 or apache2ctl start)
+  "forwardPorts": [
+    8080,
+    3306,
+    "adminer:8080",
+    "mailhog:8025"
+  ],
+  "otherPortsAttributes": {
+    "onAutoForward": "ignore"
+  },
+  // Use 'postCreateCommand' to run commands after the container is created.
+  // "postCreateCommand": "sudo chmod a+x \"$(pwd)\" && sudo rm -rf /var/www/html && sudo ln -s \"$(pwd)\" /var/www/html"
+  // Comment out connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
+  "remoteUser": "vscode",
+  "postCreateCommand": "sudo ln -sf $(pwd) /code && composer install -n && bash .devcontainer/install.bash",
+  "features": {
+    "docker-from-docker": {
+      "version": "latest",
+      "dockerDashComposeVersion": "v2"
+    }
+  }
+}

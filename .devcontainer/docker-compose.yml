@@ -1,0 +1,80 @@
+
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        # [Choice] PHP version (use -bullseye variants on local arm64/Apple Silicon): 8, 8.0, 7, 7.4, 7.3,
+        # 8-bullseye, 8.0-bullseye, 7-bullseye, 7.4-bullseye, 7.3-bullseye, 8-buster, 8.0-buster, 7-buster,
+        # 7.4-buster, 7.3-buster
+        # https://mcr.microsoft.com/v2/vscode/devcontainers/php/tags/list
+        VARIANT: "8.1-bullseye"
+        # [Choice] Node.js version: none, lts/*, 16, 14, 12, 10
+        NODE_VERSION: "lts/*"
+    restart: unless-stopped
+    volumes:
+      - ../..:/workspaces:cached
+      - assets:/srv/dumps/migration/sites/
+    network_mode: service:db
+    depends_on:
+      db:
+        condition: service_healthy
+      migration_db:
+        condition: service_healthy
+    command: apache2-foreground
+    environment:
+      MYSQL_ROOT_PASSWORD: drupal
+      MYSQL_DATABASE: drupal
+      MYSQL_USER: drupal
+      MYSQL_PASSWORD: drupal
+      DRUSH_ALLOW_XDEBUG: 1
+
+  db:
+    image: mysql:8.0
+    restart: unless-stopped
+    volumes:
+      - mysql-data:/var/lib/mysql
+    healthcheck:
+      test: [ "CMD-SHELL", "mysql -udrupal -pdrupal -e 'use drupal' || exit 1"]
+      interval: 3s
+      timeout: 60s
+      retries: 40
+      start_period: 20s
+    environment:
+      MYSQL_ROOT_PASSWORD: drupal
+      MYSQL_DATABASE: drupal
+      MYSQL_USER: drupal
+      MYSQL_PASSWORD: drupal
+
+  migration_db:
+    image: mysql:5.7.29
+    restart: unless-stopped
+    volumes:
+      - migration_db:/var/lib/mysql
+    healthcheck:
+      test: [ "CMD-SHELL", "mysql -umigration -pmigration -e 'use migration' || exit 1"]
+      interval: 3s
+      timeout: 60s
+      retries: 40
+      start_period: 20s
+    environment:
+      MYSQL_ROOT_PASSWORD: migration
+      MYSQL_DATABASE: migration
+      MYSQL_USER: migration
+      MYSQL_PASSWORD: migration
+
+  mailhog:
+    image: mailhog/mailhog
+    restart: unless-stopped
+
+  adminer:
+    image: adminer
+    restart: unless-stopped
+
+volumes:
+  mysql-data: null
+  migration_db: null
+  assets: null
