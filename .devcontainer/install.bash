@@ -29,10 +29,11 @@ cp -f .devcontainer/launch.json .vscode/launch.json
 
 printf "\n${GREEN}${bold}Run drush site:install...\n\n${NC}"
 # Install new minimal drupal profile.
-drush si minimal --site-name=DEV --account-name=admin --account-pass=admin --account-mail=hello@admin.jet.dev --db-url=mysql://$MYSQL_USER:$MYSQL_PASSWORD@db:3306/$MYSQL_DATABASE -y || { printf "\n${RED}${bold}ERROR Site install ...\n\n${NC}"; exit 1; };
+# drush si minimal --site-name=DEV --account-name=admin --account-pass=admin --account-mail=hello@admin.jet.dev --db-url=mysql://$MYSQL_USER:$MYSQL_PASSWORD@db:3306/$MYSQL_DATABASE -y || { printf "\n${RED}${bold}ERROR Site install ...\n\n${NC}"; exit 1; };
 
 # Install drupal existing config.
-# drush si --existing-config --site-name=DEV --account-name=root --account-pass=bstd --account-mail=hello@jet.dev -y || { printf "\n${RED}${bold}ERROR Site install ...\n\n${NC}"; exit 1; }
+#
+drush si --existing-config --site-name=DEV --account-name=root --account-pass=admin --account-mail=hello@jet.dev -y || { printf "\n${RED}${bold}ERROR Site install ...\n\n${NC}"; exit 1; }
 
 # Add root system_administrator role
-drush user-add-role "system_administrator" root
+# drush user-add-role "system_administrator" root
