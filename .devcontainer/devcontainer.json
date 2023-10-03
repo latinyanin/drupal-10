@@ -11,7 +11,7 @@
   },
   "remoteEnv": {
     "NRXS_DEV_SERVER_USER_NAME": "${localEnv:NRXS_DEV_SERVER_USER_NAME}",
-    "PATH": "${containerEnv:PATH}:/workspaces/logbook/vendor/bin/"
+    "PATH": "${containerEnv:PATH}:/code/vendor/bin/"
   },
 
   "settings": {
