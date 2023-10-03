@@ -1,6 +1,6 @@
 # See here for image contents: https://github.com/microsoft/vscode-dev-containers/tree/v0.195.0/containers/php/.devcontainer/base.Dockerfile
 # [Choice] PHP version (use -bullseye variants on local arm64/Apple Silicon): 8, 8.0, 7, 7.4, 7.3, 8-bullseye, 8.0-bullseye, 7-bullseye, 7.4-bullseye, 7.3-bullseye, 8-buster, 8.0-buster, 7-buster, 7.4-buster, 7.3-buster
-ARG VARIANT=8-bullseye
+ARG VARIANT=8.1-bullseye
 FROM mcr.microsoft.com/vscode/devcontainers/php:0-${VARIANT}
 
 # Stop the xdebug message spam
@@ -33,8 +33,9 @@ RUN pecl channel-update pecl.php.net
 # Install pecl modules
 RUN pecl install \
   imagick \
+  redis \
   apcu && \
-  docker-php-ext-enable imagick apcu && \
+  docker-php-ext-enable imagick redis apcu && \
   echo "apc.enable=1" >> /usr/local/etc/php/conf.d/docker-php-ext-apcu.ini
 
 RUN docker-php-ext-configure gd \
@@ -44,17 +45,10 @@ RUN docker-php-ext-configure gd \
 
 RUN docker-php-ext-install -j "$(nproc)" gd mysqli pdo pdo_mysql zip
 
-# [Choice] Node.js version: none, lts/*, 16, 14, 12, 10
-ARG NODE_VERSION="none"
-RUN if [ "${NODE_VERSION}" != "none" ]; then su vscode -c "umask 0002 && . /usr/local/share/nvm/nvm.sh && nvm install ${NODE_VERSION} 2>&1"; fi
-
-RUN sudo curl -fsSL -o /usr/local/bin/drush "https://github.com/drush-ops/drush-launcher/releases/latest/download/drush.phar" && \
-  sudo chmod +x /usr/local/bin/drush
-
 # Enable apache modules
 RUN a2enmod rewrite headers
-
-RUN echo "memory_limit=512M" >> /usr/local/etc/php/conf.d/memory_limit.ini
+ARG MEMORY_LIMIT=512M
+RUN echo "memory_limit=$MEMORY_LIMIT" >> /usr/local/etc/php/conf.d/memory_limit.ini
 RUN echo "post_max_size=50M" >> /usr/local/etc/php/conf.d/post_max_size.ini
 RUN echo "upload_max_filesize=50M" >> /usr/local/etc/php/conf.d/upload_max_filesize.ini
 

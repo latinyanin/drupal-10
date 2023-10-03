@@ -1,3 +1,10 @@
+# gitignore template for Drupal 8 projects
+#
+# earlier versions of Drupal are tracked in `community/PHP/`
+#
+# follows official upstream conventions:
+# https://www.drupal.org/docs/develop/using-composer
+
 # Ignore configuration files that may contain sensitive information
 /web/sites/*/*settings*.php
 /web/sites/*/*services*.yml
@@ -16,9 +23,7 @@
 
 # Ignore drupal core (if not versioning drupal sources)
 /web/vendor
-/web/.gitignore
 /web/core
-/web/modules/contrib/
 /web/modules/README.txt
 /web/profiles/README.txt
 /web/sites/development.services.yml
@@ -26,7 +31,6 @@
 /web/sites/example.sites.php
 /web/sites/README.txt
 /web/themes/README.txt
-/web/themes/contrib
 /web/.csslintrc
 /web/.editorconfig
 /web/.eslintignore
@@ -42,10 +46,10 @@
 /web/INSTALL.txt
 /web/LICENSE.txt
 /web/README.txt
+/web/README.md
 /web/robots.txt
 /web/update.php
 /web/web.config
-/web/libraries
 
 # Ignore vendor dependencies and scripts
 /vendor
@@ -57,12 +61,5 @@
 /drush
 /drupal.phar
 /drupal
-/docker
-/.editorconfig
-/.gitattributes
-.vscode
-.workspace
-*.sql
-*.sql.gz
-/config/.htaccess
-.devcontainer/domains.env
+/.devcontainer/.env
+/.vscode

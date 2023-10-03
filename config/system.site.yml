@@ -1,8 +1,8 @@
 _core:
   default_config_hash: l58O_yEXSo-SeJi19LXdzTU1tNJG3lmnIhCitRkM1tk
 langcode: en
-uuid: 8f08cf0b-cf7a-4e4a-a4ba-a70b8a19bb4e
-name: DEV
+uuid: 43cca1b6-1ed2-4f9c-a657-3b7cada91173
+name: Logbook
 mail: admin@example.com
 slogan: ''
 page:
