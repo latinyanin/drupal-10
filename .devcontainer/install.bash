@@ -31,13 +31,12 @@ fi
 # Copy settings.php to site
 sudo chmod 0755 web/sites/default
 sudo rm -rf web/sites/default/settings.php web/sites/default/settings.local.php web/sites/default/services.yml web/sites/default/files
-
 cp .devcontainer/develop.settings.php web/sites/default/settings.php
 cp .devcontainer/services.yml web/sites/default/services.yml
 if [ "${ENABLE_TWIG_DEBUG}" == 'true' ]
 then
-  sed -i 's/ debug: false/ debug: true/' /workspaces/drupal-9/web/sites/default/services.yml
-  sed -i 's/ cache: true/ cache: false/' /workspaces/drupal-9/web/sites/default/services.yml
+    sed -i 's/ debug: false/ debug: true/' /code/web/sites/default/services.yml
+    sed -i 's/ cache: true/ cache: false/' /code/web/sites/default/services.yml
 fi
 mkdir -p .vscode | printf "\n${NC}${bold}.vscode exist...\n${NC}${normal}"
 cp -f .devcontainer/launch.json .vscode/launch.json
