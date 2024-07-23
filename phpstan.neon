@@ -1,0 +1,29 @@
+parameters:
+    level: 9
+    paths:
+        - web/modules/custom
+        - web/themes/custom
+    checkImplicitMixed: true
+    checkBenevolentUnionTypes: true
+    reportUnmatchedIgnoredErrors: false
+    ignoreErrors:
+        # new static() is a best practice in Drupal, so we cannot fix that.
+      - "#^Unsafe usage of new static#"
+      -
+        message: '/^Function [a-zA-Z0-9\\_]+\(\) has no return typehint specified\./'
+        path: *.module
+      -
+        message: '/^Function [a-zA-Z0-9\\_]+\(\) return type has no value type specified/'
+        path: *.module
+      -
+        message: '/^Function [a-zA-Z0-9\\_]+\(\) has parameter .* no value type specified/'
+        path: *.module
+      -
+        message: '/^Function [a-zA-Z0-9\\_]+\(\) has no return typehint specified\./'
+        path: *.theme
+      -
+        message: '/^Function [a-zA-Z0-9\\_]+\(\) return type has no value type specified/'
+        path: *.theme
+      -
+        message: '/^Function [a-zA-Z0-9\\_]+\(\) has parameter .* no value type specified/'
+        path: *.theme
