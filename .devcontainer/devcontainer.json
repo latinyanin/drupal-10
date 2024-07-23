@@ -1,3 +1,6 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
+// https://github.com/microsoft/vscode-dev-containers/tree/v0.209.6/containers/php-mariadb
+// Update the VARIANT arg in docker-compose.yml to pick a PHP version
 {
   "name": "PHP & MYSQL",
   "dockerComposeFile": "docker-compose.yml",
@@ -5,15 +8,13 @@
   "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
   // Minimum host requirements
   "hostRequirements": {
-    "cpus": 4,
+    "cpus": 2,
     "memory": "4gb",
     "storage": "6gb"
   },
   "remoteEnv": {
-    "NRXS_DEV_SERVER_USER_NAME": "${localEnv:NRXS_DEV_SERVER_USER_NAME}",
-    "PATH": "${containerEnv:PATH}:/code/vendor/bin/"
+    "PATH": "${containerEnv:PATH}:/code/vendor/bin/",
   },
-
   "settings": {
     "editor.renderWhitespace": "boundary",
     "files.trimTrailingWhitespace": true,
@@ -76,15 +77,15 @@
     ],
     "phpsab.snifferMode": "onType",
     "phpsab.snifferTypeDelay": 500,
-    "phpsab.standard": "Drupal,DrupalPractice"
+    "phpsab.standard": "Drupal,DrupalPractice",
   },
   // Add the IDs of extensions you want installed when the container is created.
   "extensions": [
     "bmewburn.vscode-intelephense-client",
     "neilbrayfield.php-docblocker",
-    "rangav.vscode-thunder-client",
     "valeryanm.vscode-phpsab",
-    "xdebug.php-debug"
+    "xdebug.php-debug",
+    "SanderRonde.phpstan-vscode"
   ],
   // For use with PHP or Apache (e.g.php -S localhost:8080 or apache2ctl start)
   "forwardPorts": [
@@ -102,7 +103,7 @@
   "remoteUser": "vscode",
   "postCreateCommand": "sudo ln -sf $(pwd) /code && composer install -n && bash .devcontainer/install.bash",
   "features": {
-    "docker-from-docker": {
+    "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {
       "version": "latest",
       "dockerDashComposeVersion": "v2"
     }

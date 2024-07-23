@@ -109,6 +109,7 @@ parameters:
       - svg
       - twig
   renderer.config:
+    debug: false
     # Renderer required cache contexts:
     #
     # The Renderer will automatically associate these cache contexts with every
