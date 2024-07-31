@@ -2,7 +2,7 @@ _core:
   default_config_hash: l58O_yEXSo-SeJi19LXdzTU1tNJG3lmnIhCitRkM1tk
 langcode: en
 uuid: 43cca1b6-1ed2-4f9c-a657-3b7cada91173
-name: Drupal 10 demo
+name: 'Drupal 10 demo'
 mail: admin@example.com
 slogan: ''
 page:
