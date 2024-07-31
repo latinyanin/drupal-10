@@ -1,0 +1,7 @@
+example.example:
+  path: '/example'
+  defaults:
+    _title: 'Example'
+    _controller: '\Drupal\example\Controller\ExampleController'
+  requirements:
+    _permission: 'access content'

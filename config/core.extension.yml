@@ -10,6 +10,7 @@ module:
   devel: 0
   devel_generate: 0
   dynamic_page_cache: 0
+  example: 0
   field: 0
   field_ui: 0
   file: 0
