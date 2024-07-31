@@ -4,11 +4,22 @@ module:
   admin_toolbar: 0
   block: 0
   breakpoint: 0
+  contextual: 0
+  datetime: 0
   dblog: 0
   devel: 0
+  devel_generate: 0
   dynamic_page_cache: 0
   field: 0
+  field_ui: 0
+  file: 0
   filter: 0
+  image: 0
+  layout_builder: 0
+  layout_discovery: 0
+  link: 0
+  menu_link_content: 0
+  menu_ui: 0
   mysql: 0
   node: 0
   page_cache: 0
@@ -19,6 +30,8 @@ module:
   toolbar: 0
   update: 0
   user: 0
+  views_ui: 0
+  views: 10
   minimal: 1000
 theme:
   stark: 0
